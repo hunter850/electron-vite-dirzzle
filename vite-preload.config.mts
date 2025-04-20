@@ -16,6 +16,7 @@ export default defineConfig(({ mode }) => {
                 external: [
                     "electron",
                     "@libsql/client",
+                    "better-sqlite3",
                     ...builtinModules,
                     ...builtinModules.map((module) => `node:${module}`),
                 ],

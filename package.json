@@ -23,11 +23,13 @@
         "db:studio": "drizzle-kit studio"
     },
     "dependencies": {
-        "@libsql/client": "^0.15.4"
+        "better-sqlite3": "^11.9.1"
     },
     "devDependencies": {
         "@electron/asar": "^3.4.1",
+        "@electron/rebuild": "^3.7.2",
         "@eslint/js": "^9.22.0",
+        "@types/better-sqlite3": "^7.6.13",
         "@types/node": "^22.14.1",
         "@types/react": "^19.0.10",
         "@types/react-dom": "^19.0.4",
