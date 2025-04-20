@@ -22,7 +22,9 @@ function createWindow() {
 }
 
 app.whenReady().then(async () => {
+    console.time("migrate");
     await runMigrate();
+    console.timeEnd("migrate");
     createWindow();
 
     app.on("activate", () => {

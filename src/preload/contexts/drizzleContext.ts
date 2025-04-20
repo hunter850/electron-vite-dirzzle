@@ -1,5 +1,7 @@
 import { ipcRenderer } from "electron";
 import { UserSettingTable } from "~/schema";
+// types
+// import type { ResultSet } from "@libsql/client";
 
 const drizzleContext = {
     setUsers: async () => {
@@ -23,6 +25,11 @@ const drizzleContext = {
             userId
         )) as typeof UserSettingTable.$inferInsert;
         return initSettingData;
+    },
+    execute: async <T = unknown>(sql: string, params: any[], method: "values" | "run" | "all" | "get") => {
+        const inputMethod = method === "values" ? "all" : method;
+        const executeData = (await ipcRenderer.invoke("db:execute", sql, params, inputMethod)) as T[];
+        return executeData;
     },
 };
 

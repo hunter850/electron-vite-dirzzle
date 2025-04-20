@@ -93,4 +93,16 @@ export default function drizzleEvents() {
             .returning();
         return initSettingData;
     });
+    ipcMain.handle(
+        "db:execute",
+        async (_event: IpcMainInvokeEvent, sql: string, params: any[], method: "run" | "all" | "get") => {
+            const stmt = client.prepare(sql);
+            const result = stmt[method](...params) as Record<string, any>[] | Record<string, any>;
+            if (Array.isArray(result)) {
+                return result.map(Object.values);
+            } else {
+                return Object.values(result);
+            }
+        }
+    );
 }
