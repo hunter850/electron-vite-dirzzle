@@ -1,54 +1,84 @@
-# React + TypeScript + Vite
+# Electron + Vite + React + TypeScript
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+這是一個使用 Electron、Vite、React 和 TypeScript 建立的桌面應用程式專案。
+This is a desktop application project built with Electron, Vite, React, and TypeScript.
 
-Currently, two official plugins are available:
+## 環境需求 (Requirements)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Node.js
+- PNPM (專案使用 PNPM 作為包管理器 / Project uses PNPM as package manager)
 
-## Expanding the ESLint configuration
+## 環境變數設定 (Environment Variables)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+在專案根目錄創建 `.env` 文件：
+Create a `.env` file in the project root:
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+```plaintext
+PORT=3000
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 安裝依賴 (Install Dependencies)
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+```bash
+pnpm install
+```
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+## 開發模式 (Development)
+
+啟動開發環境：
+Start development environment:
+
+```bash
+pnpm dev
+```
+
+這個命令會：
+This command will:
+
+1. 建立 Electron 主程序和預加載腳本
+   Build Electron main process and preload scripts
+2. 啟動 Vite 開發伺服器
+   Start Vite development server
+3. 啟動 Electron 應用程式
+   Launch Electron application
+
+## 建置專案 (Build)
+
+打包應用程式：
+Build the application:
+
+```bash
+pnpm build
+```
+
+這個命令會：
+This command will:
+
+1. 建立主程序、預加載腳本和渲染程序
+   Build main process, preload scripts, and renderer process
+2. 打包成可執行的桌面應用程式
+   Package into executable desktop application
+
+## 專案結構 (Project Structure)
+
+```
+├── src/
+│   ├── main/          # Electron 主程序 / Electron main process
+│   ├── preload/       # Electron 預加載腳本 / Electron preload scripts
+│   └── renderer/      # React 應用程式 (渲染程序) / React application (renderer process)
+├── vite.config.mts             # Vite 渲染程序配置 / Vite renderer process config
+├── vite-main.config.mts        # Vite 主程序配置 / Vite main process config
+└── vite-preload.config.mts     # Vite 預加載腳本配置 / Vite preload script config
+```
+
+## 資料庫工具 (Database Tools)
+
+專案包含了一些資料庫相關的指令：
+The project includes some database-related commands:
+
+```bash
+pnpm db:generate  # 生成資料庫遷移 / Generate database migrations
+pnpm db:drop     # 刪除資料庫 / Drop database
+pnpm db:migrate  # 執行資料庫遷移 / Run database migrations
+pnpm db:studio   # 啟動資料庫管理介面 / Start database management interface
 ```
