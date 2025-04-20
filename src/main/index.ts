@@ -10,6 +10,7 @@ function createWindow() {
         height: 600,
         webPreferences: {
             preload: path.join(__dirname, "../preload/index.js"),
+            sandbox: true,
         },
     });
     windowSizeEvents(win);
